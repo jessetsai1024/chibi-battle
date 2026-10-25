@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>赤壁之戰（建安十三年・西元 208 年冬）｜史實互動展示</title>
+<meta name="description" content="以《三國志》與裴松之注考證赤壁之戰：互動時間軸、示意地圖、人物卡片、史實與《三國演義》對照。">
+<style>
+:root{--paper:#f3e9d2;--paper2:#e8dbbd;--ink:#2a1f16;--ink2:#5a4632;--red:#a3291f;--cao:#2f4f7f;--liu:#2f7d4f;--sun:#b8361e;--gold:#b08a3e;--line:#c9b48a}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"Noto Serif TC","Songti TC","PMingLiU","Source Han Serif TC",serif;line-height:1.75;
+background-image:radial-gradient(circle at 20% 10%,rgba(176,138,62,.12),transparent 40%),radial-gradient(circle at 80% 90%,rgba(163,41,31,.08),transparent 40%)}
+a{color:var(--red)}
+header.hero{position:relative;overflow:hidden;background:linear-gradient(180deg,#1b120c,#3a1d12 60%,#5b2414);color:#f6e7c8;padding:56px 20px 70px;text-align:center}
+.hero h1{font-size:clamp(2.2rem,7vw,4.2rem);letter-spacing:.3em;margin:0 0 .2em;text-shadow:0 0 18px rgba(255,120,40,.6)}
+.hero p{margin:.3em auto;max-width:720px;color:#e8cfa0}
+.hero .seal{display:inline-block;border:2px solid #d4553e;color:#ff8d6b;padding:2px 10px;border-radius:4px;font-size:.9rem;margin-top:10px}
+.embers{position:absolute;inset:0;pointer-events:none}
+.embers i{position:absolute;bottom:-10px;width:6px;height:6px;border-radius:50%;background:#ffb347;box-shadow:0 0 8px #ff6a00;animation:rise linear infinite;opacity:.8}
+@keyframes rise{to{transform:translateY(-420px) translateX(30px);opacity:0}}
+nav.top{position:sticky;top:0;z-index:20;background:rgba(42,31,22,.94);display:flex;gap:4px;overflow-x:auto;padding:6px 10px;-webkit-overflow-scrolling:touch}
+nav.top a{color:#f1dfb8;text-decoration:none;white-space:nowrap;padding:6px 12px;border-radius:16px;font-size:.95rem}
+nav.top a:hover{background:#5b2414}
+main{max-width:1180px;margin:0 auto;padding:0 16px 40px}
+section{padding:36px 0 10px}
+h2{font-size:1.7rem;border-left:6px solid var(--red);padding-left:12px;margin:0 0 14px;letter-spacing:.1em}
+.note{font-size:.88rem;color:var(--ink2)}
+/* timeline */
+.tl-wrap{display:grid;grid-template-columns:1.15fr 1fr;gap:18px;align-items:start}
+.nodes{display:flex;gap:6px;overflow-x:auto;padding:10px 2px 14px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;position:relative}
+.node{flex:0 0 auto;scroll-snap-align:center;border:1px solid var(--line);background:var(--paper2);color:var(--ink);border-radius:20px;padding:6px 12px;cursor:pointer;font:inherit;font-size:.9rem;min-height:40px}
+.node b{color:var(--red);margin-right:4px}
+.node.on{background:var(--red);color:#fff;border-color:var(--red)}
+.node.on b{color:#ffd9a0}
+.mapbox{background:#efe3c4;border:1px solid var(--line);border-radius:10px;padding:6px;position:sticky;top:56px}
+svg#map{width:100%;height:auto;display:block}
+.legend{display:flex;flex-wrap:wrap;gap:10px;font-size:.82rem;padding:4px 6px}
+.legend span::before{content:"";display:inline-block;width:22px;height:4px;margin-right:5px;vertical-align:middle;background:var(--c)}
+.card-step{background:#fbf5e6;border:1px solid var(--line);border-radius:10px;padding:16px 18px;box-shadow:0 2px 10px rgba(60,40,20,.08);min-height:360px;position:relative;overflow:hidden}
+.card-step h3{margin:0;font-size:1.35rem}
+.card-step .date{color:var(--red);font-size:.9rem}
+.ctrl{display:flex;gap:8px;align-items:center;justify-content:space-between;margin:10px 0}
+.ctrl button{font:inherit;background:var(--ink);color:#f3e2bf;border:0;border-radius:6px;padding:8px 16px;cursor:pointer;min-height:42px}
+.ctrl button:disabled{opacity:.35;cursor:default}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.vs div{border-radius:8px;padding:10px 12px;font-size:.93rem}
+.vs .fact{background:#e7efe2;border-left:4px solid var(--liu)}
+.vs .fic{background:#f6e1dc;border-left:4px solid var(--sun)}
+.vs h4{margin:0 0 4px;font-size:.95rem}
+blockquote{margin:10px 0;padding:8px 12px;background:#f1e6cc;border-left:4px solid var(--gold);font-size:.93rem}
+blockquote cite{display:block;font-style:normal;color:var(--ink2);font-size:.82rem;margin-top:3px}
+.tag{display:inline-block;font-size:.75rem;padding:0 6px;border-radius:4px;margin-left:4px;vertical-align:middle}
+.tag.d{background:#e6c96b;color:#3a2a00}.tag.f{background:#d7553c;color:#fff}
+/* fire */
+.card-step.fire{background:linear-gradient(180deg,#2a120a,#4b1a0c);color:#fbe7c6}
+.card-step.fire blockquote{background:rgba(255,200,120,.12);color:#fbe7c6}
+.card-step.fire .vs .fact{background:rgba(120,200,140,.15)}.card-step.fire .vs .fic{background:rgba(255,120,90,.18)}
+.card-step.fire .date{color:#ffb070}.card-step.fire blockquote cite,.card-step.fire .note{color:#e0b58a}
+.flames{position:absolute;left:0;right:0;bottom:0;height:70px;pointer-events:none;display:none}
+.card-step.fire .flames{display:block}
+.flames i{position:absolute;bottom:-10px;width:34px;height:60px;border-radius:50% 50% 20% 20%;background:radial-gradient(circle at 50% 70%,#ffe08a,#ff7b1c 45%,rgba(200,30,0,0) 70%);filter:blur(2px);animation:flick 1s ease-in-out infinite alternate;opacity:.75}
+@keyframes flick{0%{transform:scaleY(.8) translateY(6px)}100%{transform:scaleY(1.25) translateY(-6px)}}
+.card-step.fire > *:not(.flames){position:relative;z-index:1}
+/* map */
+.river{fill:none;stroke:#7fa6b8;stroke-linecap:round}
+.city circle{fill:#fff8e6;stroke:var(--ink);stroke-width:1.5}
+.city text{font-size:15px;fill:var(--ink);paint-order:stroke;stroke:#efe3c4;stroke-width:3px}
+.city.hl circle{fill:var(--red);r:7}
+.route{fill:none;stroke-width:4;stroke-linecap:round;marker-end:url(#arr)}
+.route.cao{stroke:var(--cao)}.route.liu{stroke:var(--liu)}.route.sun{stroke:var(--sun)}.route.dip{stroke:#b5791d;stroke-dasharray:6 5;stroke-width:3}
+.route.anim{animation:draw 1.6s ease forwards}
+@keyframes draw{from{stroke-dashoffset:var(--len)}to{stroke-dashoffset:0}}
+.mapfire{animation:pulse .6s ease-in-out infinite alternate;transform-origin:center;transform-box:fill-box}
+@keyframes pulse{from{opacity:.6;transform:scale(.9)}to{opacity:1;transform:scale(1.15)}}
+/* people */
+.people{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}
+.pc{background:#fbf5e6;border:1px solid var(--line);border-radius:10px;padding:12px;cursor:pointer;text-align:left;font:inherit;color:inherit;border-top:5px solid var(--c)}
+.pc .nm{font-size:1.25rem;font-weight:700}.pc .zi{font-size:.85rem;color:var(--ink2)}
+.pc .role{font-size:.85rem;margin-top:4px}
+dialog{max-width:640px;width:92vw;border:0;border-radius:12px;padding:0;background:#fbf5e6;color:var(--ink)}
+dialog::backdrop{background:rgba(20,10,5,.6)}
+dialog .in{padding:20px 22px;border-top:8px solid var(--c)}
+dialog button.x{float:right;font-size:1.4rem;background:none;border:0;cursor:pointer;min-width:44px;min-height:44px}
+/* tables */
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;background:#fbf5e6;font-size:.93rem}
+th,td{border:1px solid var(--line);padding:8px 10px;vertical-align:top;text-align:left}
+th{background:var(--ink);color:#f3e2bf;white-space:nowrap}
+.disp{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.disp article{background:#fbf5e6;border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.disp h3{margin:0 0 6px;color:var(--red)}
+footer{background:var(--ink);color:#d9c7a2;padding:24px 16px;font-size:.88rem}
+footer .w{max-width:1180px;margin:0 auto}
+@media (max-width:860px){
+ .tl-wrap{grid-template-columns:1fr}
+ .mapbox{position:relative;top:0}
+ .vs{grid-template-columns:1fr}
+ .card-step{min-height:0}
+ h2{font-size:1.4rem}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</head>
+<body>
+<header class="hero">
+ <div class="embers" id="embers"></div>
+ <h1>赤壁之戰</h1>
+ <p>東漢建安十三年（西元 208 年）冬，曹操南下荊州，孫權、劉備聯軍以火攻破之於赤壁、烏林，奠定三分之勢。</p>
+ <p class="note" style="color:#d9b98a">本頁以陳壽《三國志》及裴松之注為據，逐段對照《三國演義》的文學虛構，並標示史家爭議。</p>
+ <span class="seal">史實考證 × 互動時間軸</span>
+</header>
+<nav class="top">
+ <a href="#timeline">時間軸・地圖</a><a href="#people">人物</a><a href="#fiction">演義虛構總表</a><a href="#debate">史家爭議</a><a href="#sources">史料出處</a>
+</nav>
+<main>
+<section id="timeline">
+ <h2>戰役經過</h2>
+ <p class="note">點選節點跳轉，或用「上一步／下一步」、鍵盤 ← →、手機左右滑動切換。月份依《三國志・武帝紀》等記載；赤壁交戰的確切月日史無明文，一般繫於建安十三年冬（約十至十二月）。</p>
+ <div class="nodes" id="nodes" role="tablist"></div>
+ <div class="tl-wrap">
+  <div class="card-step" id="step" aria-live="polite"></div>
+  <div class="mapbox">
+   <svg id="map" viewBox="0 0 860 540" role="img" aria-label="赤壁之戰示意地圖">
+    <defs>
+     <marker id="arr" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="context-stroke"/></marker>
+     <radialGradient id="fg"><stop offset="0" stop-color="#fff2a0"/><stop offset=".5" stop-color="#ff7a1a"/><stop offset="1" stop-color="#c01a00" stop-opacity="0"/></radialGradient>
+     <pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="8" stroke="#2f7d4f" stroke-opacity=".25" stroke-width="4"/></pattern>
+    </defs>
+    <rect width="860" height="540" fill="#efe3c4"/>
+    <!-- 洞庭湖 -->
+    <ellipse cx="380" cy="440" rx="70" ry="38" fill="#a9c6cf" opacity=".7"/>
+    <text x="350" y="445" font-size="12" fill="#3f6470">洞庭</text>
+    <!-- 雲夢澤（示意） -->
+    <ellipse cx="420" cy="290" rx="95" ry="30" fill="#c9d8c2" opacity=".55"/>
+    <text x="395" y="294" font-size="11" fill="#4d6a46">雲夢澤（示意）</text>
+    <!-- 長江 -->
+    <path class="river" stroke-width="9" d="M0,300 C80,290 150,300 205,305 C270,312 320,360 360,395 C400,420 440,410 475,385 C520,350 580,320 625,305 C660,300 690,318 715,330 C760,360 790,400 860,430"/>
+    <text x="20" y="288" font-size="15" fill="#3f6470" font-weight="700">長江</text>
+    <!-- 漢水 -->
+    <path class="river" stroke-width="6" d="M240,0 C270,30 290,50 300,70 C315,110 330,160 380,200 C450,250 560,270 625,305"/>
+    <text x="330" y="150" font-size="14" fill="#3f6470" font-weight="700" transform="rotate(48 330 150)">漢水（沔水）</text>
+    <!-- 荊南 -->
+    <rect id="jingnan" x="100" y="455" width="640" height="80" fill="url(#hatch)" opacity="0"/>
+    <g id="routes"></g>
+    <g id="cities"></g>
+    <g id="fx"></g>
+    <text x="850" y="530" font-size="11" text-anchor="end" fill="#6b5a44">示意圖・位置與比例非實測</text>
+    <g transform="translate(820,40)"><path d="M0,-18 L5,0 L0,-4 L-5,0 z" fill="#2a1f16"/><text y="14" font-size="12" text-anchor="middle">北</text></g>
+   </svg>
+   <div class="legend">
+    <span style="--c:#2f4f7f">曹操軍</span><span style="--c:#2f7d4f">劉備軍</span><span style="--c:#b8361e">孫權軍</span><span style="--c:#b5791d">使節往來</span>
+   </div>
+   <p class="note" style="margin:2px 6px">※ 自繪示意圖。赤壁取主流的蒲圻（今湖北赤壁市）說；路線依史料文字推定，非精確行軍路線。</p>
+  </div>
+ </div>
+</section>
+
+<section id="people">
+ <h2>人物</h2>
+ <p class="note">點卡片看史實簡介與出處。色條：藍＝曹方、綠＝劉方、紅＝孫方、灰＝劉表一系。</p>
+ <div class="people" id="peopleGrid"></div>
+ <dialog id="dlg"><div class="in" id="dlgIn"></div></dialog>
+</section>
+
+<section id="fiction">
+ <h2>《三國演義》虛構情節總表</h2>
+ <div class="tbl"><table>
+  <thead><tr><th>演義情節</th><th>小說寫法</th><th>史書實際</th><th>出處／判定</th></tr></thead>
+  <tbody id="fictionBody"></tbody>
+ </table></div>
+</section>
+
+<section id="debate">
+ <h2>史家爭議點</h2>
+ <div class="disp" id="debateBox"></div>
+</section>
+
+<section id="sources">
+ <h2>主要史料出處</h2>
+ <ul>
+  <li>陳壽《三國志・魏書・武帝紀》《魏書・劉表傳》《魏書・曹仁傳》《魏書・賈詡傳》</li>
+  <li>《三國志・蜀書・先主傳》《蜀書・諸葛亮傳》《蜀書・關羽傳》</li>
+  <li>《三國志・吳書・吳主傳》《吳書・周瑜傳》《吳書・魯肅傳》《吳書・程普傳》《吳書・黃蓋傳》</li>
+  <li>裴松之注所引：《江表傳》（虞溥）、《山陽公載記》（樂資）、《魏略》（魚豢）、《魏書》（王沈）、《九州春秋》等</li>
+  <li>參考：司馬光《資治通鑑・漢紀五十七》（建安十三年）；羅貫中《三國演義》第四十三～五十回（作為對照）</li>
+ </ul>
+ <p class="note">原文可查：<a href="https://ctext.org/sanguozhi/zh" target="_blank" rel="noopener">中國哲學書電子化計劃・三國志</a>、<a href="https://zh.wikisource.org/wiki/三國志" target="_blank" rel="noopener">維基文庫・三國志</a>。本頁引文力求依原文，標點為通行點校本格式；若有出入，以點校本為準。</p>
+</section>
+</main>
+<footer><div class="w">赤壁之戰互動展示｜史實考證以《三國志》及裴注為主。演義情節僅作文學對照。地圖為示意。</div></footer>
+
+<script>
+const C={
+ xiangyang:[300,72,'襄陽'],fancheng:[318,48,'樊城'],xinye:[340,12,'新野'],dangyang:[215,195,'當陽・長坂'],jiangling:[195,318,'江陵（南郡）'],
+ hanjin:[330,215,'漢津'],xiakou:[625,292,'夏口'],fankou:[712,348,'樊口'],chibi:[470,408,'赤壁'],wulin:[455,368,'烏林'],
+ huarong:[330,330,'華容'],chaisang:[815,440,'柴桑'],wuling:[150,490,'武陵'],changsha:[480,495,'長沙'],lingling:[300,525,'零陵'],guiyang:[620,520,'桂陽'],jiangxia:[575,250,'江夏']
+};
+const S=[
+{t:'劉表病卒',d:'建安十三年（208）七～八月',hl:['xiangyang','fancheng'],routes:[
+ ['cao','M340,-30 C340,-10 340,0 340,10','曹操南征']],
+ body:`<p>建安十三年七月，曹操南征劉表。八月，荊州牧劉表病卒，次子劉琮繼位，屯襄陽；寄寓荊州的劉備屯樊城。劉表長子劉琦此前已出為江夏太守。</p>
+ <blockquote>秋七月，公南征劉表。八月，表卒，其子琮代，屯襄陽，劉備屯樊。<cite>——《三國志・魏書・武帝紀》</cite></blockquote>`,
+ fact:'劉琦因與劉琮爭嗣，自求出任江夏太守（諸葛亮傳記劉琦問計、亮以「申生在內而危，重耳在外而安」點之）。',
+ fic:'演義大致依史，但加重蔡瑁、蔡夫人謀害劉備等情節（如「馬躍檀溪」源自《世語》，裴松之已疑之）。'},
+{t:'劉琮降曹',d:'建安十三年九月',hl:['xinye','xiangyang'],routes:[['cao','M340,12 C330,40 315,55 302,68','曹軍至新野']],
+ body:`<p>曹操大軍到新野，劉琮聽從蒯越、傅巽、王粲等人之勸，舉州投降。劉備事前未獲通知，得知時曹軍已近，只得率眾南撤。</p>
+ <blockquote>九月，公到新野，琮遂降，備走夏口。<cite>——《三國志・魏書・武帝紀》</cite></blockquote>
+ <blockquote>琮聞曹公來征，遣使請降。先主屯樊，不知曹公卒至，至宛乃聞之，遂將其眾去。<cite>——《三國志・蜀書・先主傳》</cite></blockquote>`,
+ fact:'有人勸劉備攻劉琮奪荊州，劉備說「吾不忍也」（先主傳）。荊州降眾後來成為曹軍水師主力之一。',
+ fic:'演義寫曹操事後派于禁殺劉琮母子；史載劉琮降後被任為青州刺史、封列侯（劉表傳），並無被殺。'},
+{t:'長坂之敗',d:'建安十三年九月',hl:['dangyang','hanjin','xiakou','jiangling'],routes:[
+ ['liu','M318,48 C300,60 290,70 300,72 C270,120 240,160 220,188','劉備南撤'],
+ ['cao','M302,72 C285,120 250,165 225,190','曹操輕騎追擊'],
+ ['liu','M215,195 C260,205 300,212 330,215 C430,245 540,270 615,290','劉備經漢津到夏口'],
+ ['cao','M215,195 C210,240 200,280 196,308','曹據江陵']],
+ body:`<p>劉備南撤，荊州人士多相隨，到當陽時「眾十餘萬，輜重數千兩，日行十餘里」。曹操以江陵有軍實，親率精騎五千追擊，一日一夜行三百餘里，於當陽長坂追及。劉備棄妻子，與諸葛亮、張飛、趙雲等數十騎走，斜趨漢津，與關羽水軍會合，再遇劉琦眾萬餘人，同到夏口。曹操則進據江陵。</p>
+ <blockquote>曹公以江陵有軍實，恐先主據之，乃釋輜重，輕軍到襄陽。聞先主已過，曹公將精騎五千急追之，一日一夜行三百餘里，及於當陽之長坂。先主棄妻子，與諸葛亮、張飛、趙雲等數十騎走。<cite>——《三國志・蜀書・先主傳》</cite></blockquote>`,
+ fact:'張飛率二十騎據水斷橋拒後（張飛傳）；趙雲身抱弱子（後主劉禪）保護甘夫人（趙雲傳）。',
+ fic:'演義寫趙雲單騎「七進七出」、斬將五十餘員，張飛一喝喝死夏侯傑、喝退曹軍，均屬誇張虛構。'},
+{t:'孫劉結盟',d:'建安十三年（約九～十月）',hl:['xiakou','fankou','chaisang','dangyang'],routes:[
+ ['dip','M812,435 C760,380 700,330 625,300 C500,260 330,210 222,197','魯肅西行弔喪、迎劉備'],
+ ['dip','M625,300 C700,330 760,380 810,432','諸葛亮赴柴桑'],
+ ['liu','M625,296 C660,305 690,325 708,343','劉備進駐樊口']],
+ body:`<p>魯肅聽聞劉表死，請命以弔喪為名赴荊州觀變，在當陽長坂遇上劉備，勸其與孫權聯合。劉備進住鄂縣樊口，派諸葛亮隨魯肅至柴桑見孫權。東吳朝議多主迎降，魯肅、周瑜力主抗曹，孫權遂決策出兵。</p>
+ <blockquote>事急矣，請奉命求救於孫將軍。<cite>——《三國志・蜀書・諸葛亮傳》（亮對劉備語）</cite></blockquote>
+ <blockquote>今肅可迎操耳，如將軍，不可也。<cite>——《三國志・吳書・魯肅傳》</cite></blockquote>
+ <p>曹操遺孫權書：「今治水軍八十萬眾，方與將軍會獵於吳。」（《吳主傳》裴注引《江表傳》）孫權據說拔刀斫案，曰：「諸將吏敢復有言當迎操者，與此案同！」（《周瑜傳》裴注引《江表傳》）</p>`,
+ fact:'結盟的主動方是魯肅（魯肅傳）；諸葛亮說孫權見諸葛亮傳。周瑜自鄱陽被召回，力陳曹軍四患，請精兵數萬進住夏口（周瑜傳）。',
+ fic:'演義「舌戰群儒」「智激周瑜」（以〈銅雀臺賦〉二喬激瑜）皆小說創作；史書無諸葛亮與張昭等辯論的記載，周瑜主戰亦非被激。'},
+{t:'赤壁對峙・初戰',d:'建安十三年冬',hl:['chibi','wulin','fankou','jiangling'],routes:[
+ ['sun','M812,435 C780,400 750,370 712,350 C680,330 650,310 620,305 C560,325 510,355 475,395','周瑜、程普率水軍西上'],
+ ['cao','M200,308 C270,315 320,360 355,390 C390,410 430,400 465,395','曹軍順江東下'],
+ ['cao','M465,398 C460,385 458,378 456,372','初戰不利，退屯江北烏林']],
+ body:`<p>孫權以周瑜、程普為左右督，各領萬人，與劉備並力逆曹。曹操自江陵順江東下，兩軍遇於赤壁。曹軍已有疾病，初一交戰即敗退，引次江北（烏林），周瑜等在南岸，隔江對峙。</p>
+ <blockquote>時曹公軍眾已有疾病，初一交戰，公軍敗退，引次江北。瑜等在南岸。<cite>——《三國志・吳書・周瑜傳》</cite></blockquote>
+ <blockquote>瑜、普為左右督，各領萬人，與備俱進，遇於赤壁，大破曹公軍。<cite>——《三國志・吳書・吳主傳》</cite></blockquote>`,
+ fact:'史書所見孫吳主將：周瑜、程普（左右督），魯肅為贊軍校尉助畫方略（魯肅傳）；黃蓋、韓當、周泰、呂蒙、甘寧、凌統等從征。',
+ fic:'演義此段塞入「群英會蔣幹中計」「草船借箭」等，並把蔡瑁、張允寫成被周瑜反間計借刀殺死——史無其事。'},
+{t:'黃蓋詐降・火攻',d:'建安十三年冬',fire:true,hl:['wulin','chibi'],routes:[
+ ['sun','M478,405 C474,395 470,385 462,375','黃蓋火船（東南風）']],
+ body:`<p>黃蓋見曹軍「船艦首尾相接，可燒而走」，取蒙衝鬥艦數十艘，裝滿薪草、灌以膏油，外裹帷幕，上建旌旗，先送信詐降。開戰當日東南風急，十艦在前，中江舉帆，曹軍吏士皆延頸觀望，以為黃蓋來降。距北軍二里餘同時發火，火烈風猛，船往如箭，燒盡北船，並延燒岸上營落，人馬燒溺死者甚眾。</p>
+ <blockquote>今寇眾我寡，難與持久。然觀操軍船艦首尾相接，可燒而走也。<cite>——《三國志・吳書・周瑜傳》（黃蓋語）</cite></blockquote>
+ <blockquote>蓋放諸船，同時發火。時風盛猛，悉延燒岸上營落。頃之，煙炎張天，人馬燒溺死者甚眾，軍遂敗退，還保南郡。<cite>——《三國志・吳書・周瑜傳》</cite></blockquote>
+ <blockquote>時東南風急，因以十艦最著前，中江舉帆……去北軍二里餘，同時發火，火烈風猛，往船如箭，飛埃絕爛，燒盡北船。<cite>——《周瑜傳》裴注引《江表傳》</cite></blockquote>`,
+ fact:'火攻之策出自黃蓋（黃蓋傳：「建策火攻，語在瑜傳」）。東南風為冬季偶發天氣，史書只寫「東南風急」，未言有人祈風。《江表傳》另載黃蓋中流矢墮水、被救起事。',
+ fic:'「苦肉計」（周瑜杖打黃蓋）、「闞澤密獻詐降書」、「龐統獻連環計」、「諸葛亮七星壇借東風」均為演義虛構。史書所言「首尾相接」僅指船艦密集停泊，非以鐵環連鎖。'},
+{t:'烏林敗退・華容道',d:'建安十三年冬（戰後即時）',hl:['wulin','huarong','jiangling','xiangyang'],routes:[
+ ['cao','M450,365 C410,350 370,340 335,332','曹操自華容道步歸'],
+ ['cao','M325,330 C280,325 240,320 205,315','還保南郡（江陵）'],
+ ['cao','M195,305 C230,220 270,140 298,80','曹操北歸'],
+ ['liu','M470,380 C420,360 370,345 340,336','劉備追擊、放火稍遲'],
+ ['sun','M480,398 C420,380 300,330 215,318','周瑜水陸並進追至南郡']],
+ body:`<p>曹操船艦被燒，率軍從華容道步行撤退，遇泥濘道路不通，又遇大風，令羸弱士兵背草填路，騎兵才得通過，羸兵被人馬踐踏陷入泥中，死者甚眾。劉備亦放火，但已來不及。曹操留曹仁、徐晃守江陵，樂進守襄陽，自己北還。</p>
+ <blockquote>公船艦為備所燒，引軍從華容道步歸，遇泥濘，道不通，天又大風，悉使羸兵負草填之，騎乃得過。羸兵為人馬所蹈藉，陷泥中，死者甚眾。……公曰：「劉備，吾儔也。但得計少晚；向使早放火，吾徒無類矣。」備尋亦放火而無所及。<cite>——《武帝紀》裴注引《山陽公載記》</cite></blockquote>
+ <blockquote>公至赤壁，與備戰，不利。於是大疫，吏士多死者，乃引軍還。<cite>——《三國志・魏書・武帝紀》</cite></blockquote>`,
+ fact:'先主傳記劉備「與吳軍水陸並進，追到南郡，時又疾疫，北軍多死，曹公引歸」。',
+ fic:'「華容道關羽義釋曹操」及諸葛亮預設三路伏兵（趙雲、張飛、關羽）、曹操「三笑」皆屬虛構；史載曹操是被泥濘與疫病所苦，無人放行。'},
+{t:'戰後・三分之勢',d:'建安十三年冬～建安十五年（210）',hl:['jiangling','wuling','changsha','lingling','guiyang'],jn:true,routes:[
+ ['sun','M470,400 C380,370 280,330 210,320','周瑜圍江陵（歷時約一年）'],
+ ['liu','M300,345 C240,400 190,440 155,480','劉備南征四郡'],
+ ['liu','M330,345 C360,420 420,460 470,488',''],
+ ['liu','M330,345 C320,420 305,470 300,515',''],
+ ['liu','M340,345 C450,420 560,470 612,510','']],
+ body:`<p>周瑜、程普進圍江陵，與曹仁相持一年有餘，周瑜曾中流矢；建安十四年（209），曹仁棄城北撤，孫權以周瑜領南郡太守。劉備表劉琦為荊州刺史，南征武陵、長沙、桂陽、零陵四郡，太守皆降；劉琦病死後，群下推劉備為荊州牧，治公安。其後劉備向孫權「借」南郡（建安十五年前後），三分天下的格局由此成形。</p>
+ <blockquote>先主表琦為荊州刺史，又南征四郡。武陵太守金旋、長沙太守韓玄、桂陽太守趙範、零陵太守劉度皆降。<cite>——《三國志・蜀書・先主傳》</cite></blockquote>
+ <blockquote>赤壁之役，值有疾病，孤燒船自退，橫使周瑜虛獲此名。<cite>——《周瑜傳》裴注引《江表傳》（曹操與孫權書）</cite></blockquote>`,
+ fact:'程普傳：「與周瑜為左右督，破曹公於烏林，又進攻南郡，走曹仁。」周瑜於建安十五年病逝於巴丘，年三十六。',
+ fic:'演義寫諸葛亮趁周瑜與曹仁血戰時「一氣周瑜」襲取南郡，並以「三氣周瑜」致其死，屬虛構；「借荊州」在史上是劉備往京口見孫權求都督荊州，且諸說不一。'}
+];
+const P=[
+ {n:'曹操',z:'字孟德',c:'#2f4f7f',r:'漢丞相，南征主帥',b:'建安十三年六月罷三公、自為丞相，七月南征。不戰而得荊州後順江東下，赤壁失利、軍中大疫，自華容道撤回北方。事後致書孫權，稱「值有疾病，孤燒船自退」，不承認是周瑜所敗。',s:'《魏書・武帝紀》及裴注引《山陽公載記》；《周瑜傳》注引《江表傳》'},
+ {n:'劉備',z:'字玄德',c:'#2f7d4f',r:'左將軍，豫州牧',b:'長坂敗後與關羽水軍、劉琦會合退夏口，接受魯肅聯盟之議，進駐樊口。赤壁戰中與周瑜並力，戰後水陸追擊、取荊南四郡。吳方史料多突出周瑜，蜀方史料則稱「先主與吳軍水陸並進」，其實際戰鬥比重有爭議。',s:'《蜀書・先主傳》；《吳書・周瑜傳》'},
+ {n:'孫權',z:'字仲謀',c:'#b8361e',r:'討虜將軍，領會稽太守',b:'時年二十七，坐鎮柴桑觀望成敗。採納魯肅、周瑜之議抗曹，以周瑜、程普為左右督。據《江表傳》，曾拔刀斫案以絕迎降之議。',s:'《吳書・吳主傳》；《周瑜傳》注引《江表傳》'},
+ {n:'周瑜',z:'字公瑾',c:'#b8361e',r:'中護軍、左督，赤壁主將',b:'自鄱陽被召回，力陳曹軍「舍鞍馬、仗舟楫」「驅中國士眾遠涉江湖，不習水土，必生疾病」等不利，估曹軍實數。為赤壁前線最高指揮，採黃蓋火攻之策，戰後攻江陵，建安十五年卒於巴丘。史稱其「性度恢廓」，與演義的狹隘形象截然不同。',s:'《吳書・周瑜傳》及注引《江表傳》'},
+ {n:'諸葛亮',z:'字孔明',c:'#2f7d4f',r:'劉備軍師（時年二十八）',b:'主動請命赴柴桑說孫權，分析劉備尚有關羽水軍精甲萬人、劉琦江夏戰士亦不下萬人，曹軍「遠來疲弊」「北方之人不習水戰」。史書未記其在赤壁戰場的具體指揮；戰後任軍師中郎將，督零陵、桂陽、長沙三郡賦稅。',s:'《蜀書・諸葛亮傳》'},
+ {n:'魯肅',z:'字子敬',c:'#b8361e',r:'孫權謀士，贊軍校尉',b:'孫劉聯盟的真正推手：以弔劉表喪為名赴荊州，在當陽遇劉備，勸其聯孫；回柴桑後私下對孫權說「肅可迎操耳，如將軍，不可也」。戰時為贊軍校尉助畫方略。演義將其寫成老實受欺之人，與史不符。',s:'《吳書・魯肅傳》'},
+ {n:'黃蓋',z:'字公覆',c:'#b8361e',r:'孫吳老將',b:'建策火攻，並親自詐降、率火船出擊。《江表傳》載其中流矢墮水，被救起後置於廁中，呼韓當方得救。並無「苦肉計」受杖之事。',s:'《吳書・黃蓋傳》；《周瑜傳》及注引《江表傳》'},
+ {n:'程普',z:'字德謀',c:'#b8361e',r:'蕩寇中郎將，右督',b:'孫堅舊將，與周瑜為左右督，破曹公於烏林，又攻南郡走曹仁。據《江表傳》，初頗輕周瑜，後敬服，有「與周公瑾交，若飲醇醪，不覺自醉」之語。',s:'《吳書・程普傳》；《周瑜傳》注引《江表傳》'},
+ {n:'劉琮',z:'',c:'#8a8072',r:'劉表次子，繼任荊州牧',b:'劉表死後繼位，曹軍至新野即舉州投降。降後任青州刺史、封列侯，後遷諫議大夫。演義寫其被于禁殺害，非史實。',s:'《魏書・劉表傳》'},
+ {n:'劉琦',z:'',c:'#8a8072',r:'劉表長子，江夏太守',b:'為避禍自求出任江夏，劉備敗後率眾萬餘人與之會合於夏口，是聯軍兵力的重要部分。戰後被劉備表為荊州刺史，不久病卒。',s:'《魏書・劉表傳》；《蜀書・先主傳》《諸葛亮傳》'},
+ {n:'曹仁',z:'字子孝',c:'#2f4f7f',r:'征南將軍（戰後）',b:'赤壁戰後被曹操留守江陵，與周瑜相持一年有餘，曾率數十騎出城救牛金，「眾皆服其勇」。建安十四年棄江陵北撤。',s:'《魏書・曹仁傳》；《吳書・周瑜傳》'},
+ {n:'蔣幹',z:'字子翼',c:'#2f4f7f',r:'九江人，以辯才著稱',b:'史料僅見於《周瑜傳》裴注引《江表傳》：曹操密遣蔣幹往說周瑜，周瑜帶他參觀營中軍備，示以「丈夫處世，遇知己之主」之意，蔣幹歸後稱瑜「雅量高致，非言辭所間」。一般認為此事在赤壁戰後，且無盜書情節。',s:'《周瑜傳》注引《江表傳》'}
+];
+const F=[
+ ['舌戰群儒','諸葛亮在柴桑舌辯張昭、虞翻等東吳謀士','史書只載諸葛亮說孫權；張昭等主降見《周瑜傳》注引《江表傳》，無與諸葛亮辯論記載','虛構'],
+ ['智激周瑜','諸葛亮誦〈銅雀臺賦〉稱曹操欲得二喬，激怒周瑜','周瑜自始主戰；銅雀臺建於建安十五年，戰時尚未興建','虛構'],
+ ['群英會・蔣幹盜書','蔣幹盜得偽造書信，曹操誤殺蔡瑁、張允','《江表傳》載蔣幹說周瑜無功而返，一般認為在戰後，無盜書；蔡瑁降曹後仍任官','虛構'],
+ ['草船借箭','諸葛亮以草船霧中向曹軍「借」十萬枝箭','類似事見《吳主傳》注引《魏略》：建安十八年濡須之戰，孫權乘大船觀曹軍，船受箭偏重，回船以另一面受箭，「箭均船平，乃還」','移花接木'],
+ ['苦肉計','周瑜當眾杖打黃蓋，使詐降可信','史載黃蓋以書信詐降，無受杖事（周瑜傳）','虛構'],
+ ['闞澤獻書','闞澤冒死將黃蓋降書送至曹營','史書未載送書者','虛構'],
+ ['龐統連環計','龐統說曹操以鐵環連鎖戰船','「首尾相接」只是船隻密集；龐統當時並未參與此事','虛構'],
+ ['七星壇借東風','諸葛亮設壇作法祭風','史書只記「時東南風急」，為天候條件','虛構'],
+ ['三路埋伏・華容道義釋','趙雲、張飛、關羽分路截擊，關羽念舊恩放走曹操','《山陽公載記》：曹操從華容道步歸，泥濘難行，劉備放火稍遲；無伏兵與放行','虛構'],
+ ['一氣周瑜（取南郡）','諸葛亮趁亂奪南郡、荊州、襄陽','周瑜攻江陵一年有餘，曹仁棄城後由周瑜領南郡','虛構'],
+ ['曹操八十三萬大軍','曹軍號稱八十三萬','曹操書稱「水軍八十萬眾」；周瑜估實數約二十多萬','誇大']
+];
+const D=[
+ ['兵力','<p><b>曹軍</b>：曹操遺孫權書自稱「治水軍八十萬眾」（《吳主傳》注引《江表傳》）。周瑜估計：「彼所將中國人，不過十五六萬，且軍已久疲；所得表眾，亦極七八萬耳，尚懷狐疑。」（《周瑜傳》注引《江表傳》）合計約二十二至二十四萬，但這是敵方估計，實際投入赤壁前線者可能更少，近代學者亦有不同推算。</p><p><b>聯軍</b>：周瑜請「精兵五萬」，孫權實給三萬（同注）；諸葛亮稱劉備「戰士還者及關羽水軍精甲萬人，劉琦合江夏戰士亦不下萬人」（《諸葛亮傳》），合約五萬左右。</p>'],
+ ['疫病與勝敗原因','<p>魏方記載強調疫病：「公至赤壁，與備戰，不利。於是大疫，吏士多死者，乃引軍還。」（《武帝紀》）曹操書亦稱「值有疾病，孤燒船自退」（《周瑜傳》注引《江表傳》），把燒船說成自行燒毀。吳方記載則以火攻為決定因素（《周瑜傳》），《吳主傳》亦言「士卒飢疫，死者大半」。多數史家認為疫病（可能為血吸蟲病等，屬推測）、水戰不利與火攻共同導致曹軍敗退，各方史料有立場差異。</p>'],
+ ['戰場位置','<p>「赤壁」所在歷來有多說：<b>蒲圻說</b>（今湖北赤壁市西北長江南岸，北岸對烏林）為今日主流；另有<b>嘉魚說</b>、<b>漢陽說</b>（今武漢一帶）、<b>漢川說</b>、<b>黃州說</b>等。黃州赤壁因蘇軾〈赤壁賦〉〈念奴嬌・赤壁懷古〉而聞名，稱「東坡赤壁」或「文赤壁」，蘇軾本人亦以「人道是」存疑；一般不認為是古戰場。</p>'],
+ ['火攻經過與地點','<p>《周瑜傳》正文記黃蓋詐降、放火延燒岸上營落；細節（十艦、東南風、二里餘發火）出自裴注《江表傳》，屬吳人視角。火燒的是赤壁還是烏林亦有不同表述：《程普傳》《周瑜傳》注多稱「烏林」，故有「赤壁之戰」主要燒於烏林曹營之說。《山陽公載記》則稱「公船艦為備所燒」，歸功劉備。</p>'],
+ ['劉備的角色比重','<p>吳方史料（《周瑜傳》《吳主傳》）以周瑜為主角，劉備居於輔助；蜀方《先主傳》記「權遣周瑜、程普等水軍數萬，與先主并力」，《山陽公載記》更記曹操稱「船艦為備所燒」。《武帝紀》只寫「與備戰，不利」，未提周瑜。史家普遍認為主力與火攻屬孫吳，但劉備部（含關羽水軍、劉琦部）參與作戰與追擊，比重存在爭論。</p>'],
+ ['時間與蔣幹事','<p>赤壁交戰確切月日史無明文，《資治通鑑》繫於建安十三年冬十月以後。蔣幹說周瑜之事，《江表傳》未明確繫年，一般認為在赤壁戰後（存疑）。</p>']
+];
+// build
+const $=s=>document.querySelector(s);
+const cityG=$('#cities'),routeG=$('#routes'),fx=$('#fx');
+for(const k in C){const [x,y,n]=C[k];const g=document.createElementNS('http://www.w3.org/2000/svg','g');g.setAttribute('class','city');g.id='c-'+k;
+ g.innerHTML=`<circle cx="${x}" cy="${y}" r="5"/><text x="${x+8}" y="${y-6}">${n}</text>`;cityG.appendChild(g);}
+const nodes=$('#nodes');
+S.forEach((s,i)=>{const b=document.createElement('button');b.className='node';b.setAttribute('role','tab');b.innerHTML=`<b>${i+1}</b>${s.t}`;b.onclick=()=>go(i);nodes.appendChild(b);});
+let cur=0;
+function go(i){
+ if(i<0||i>=S.length)return;cur=i;const s=S[i];
+ [...nodes.children].forEach((b,j)=>{b.classList.toggle('on',j===i);b.setAttribute('aria-selected',j===i)});
+ nodes.children[i].scrollIntoView({block:'nearest',inline:'center',behavior:'smooth'});
+ const st=$('#step');st.className='card-step'+(s.fire?' fire':'');
+ st.innerHTML=`<div class="flames">${Array.from({length:14},(_,k)=>`<i style="left:${k*7.5}%;animation-delay:${(k%5)*.17}s"></i>`).join('')}</div>
+ <div class="date">第 ${i+1} / ${S.length} 步｜${s.d}</div><h3>${s.t}</h3>${s.body}
+ <div class="vs"><div class="fact"><h4>📜 史實補充</h4>${s.fact}</div><div class="fic"><h4>📖 演義怎麼寫</h4>${s.fic}</div></div>
+ <div class="ctrl"><button id="prev" ${i===0?'disabled':''}>◀ 上一步</button><span class="note">${i+1}/${S.length}</span><button id="next" ${i===S.length-1?'disabled':''}>下一步 ▶</button></div>`;
+ $('#prev').onclick=()=>go(cur-1);$('#next').onclick=()=>go(cur+1);
+ document.querySelectorAll('.city').forEach(g=>g.classList.remove('hl'));
+ s.hl.forEach(k=>document.getElementById('c-'+k)?.classList.add('hl'));
+ // previous routes faded
+ routeG.innerHTML='';
+ S.slice(0,i).forEach(p=>p.routes.forEach(r=>addRoute(r,.18,false)));
+ s.routes.forEach((r,j)=>addRoute(r,1,true,j));
+ $('#jingnan').setAttribute('opacity',s.jn?1:0);
+ fx.innerHTML='';
+ if(s.fire||i===6){const [x,y]=C.wulin;for(let k=0;k<6;k++){const c=document.createElementNS('http://www.w3.org/2000/svg','circle');c.setAttribute('cx',x-30+k*12);c.setAttribute('cy',y+8+(k%2)*6);c.setAttribute('r',s.fire?14:7);c.setAttribute('fill','url(#fg)');c.setAttribute('class','mapfire');c.style.animationDelay=(k*.1)+'s';fx.appendChild(c);}}
+}
+function addRoute([side,d,label],op,anim,j=0){
+ const p=document.createElementNS('http://www.w3.org/2000/svg','path');p.setAttribute('d',d);p.setAttribute('class','route '+side);p.style.opacity=op;
+ routeG.appendChild(p);
+ if(anim&&side!=='dip'){const L=p.getTotalLength();p.style.strokeDasharray=L;p.style.setProperty('--len',L);p.style.strokeDashoffset=L;p.style.animationDelay=(j*.5)+'s';p.classList.add('anim');}
+ if(anim&&label){const L=p.getTotalLength(),m=p.getPointAtLength(L*.5);const t=document.createElementNS('http://www.w3.org/2000/svg','text');t.setAttribute('x',m.x+6);t.setAttribute('y',m.y+14);t.setAttribute('font-size','12');t.setAttribute('font-weight','700');t.setAttribute('fill',getComputedStyle(p).stroke);t.setAttribute('style','paint-order:stroke;stroke:#efe3c4;stroke-width:3px');t.textContent=label;routeG.appendChild(t);}
+}
+document.addEventListener('keydown',e=>{if(document.querySelector('dialog[open]'))return;if(e.key==='ArrowRight')go(cur+1);if(e.key==='ArrowLeft')go(cur-1);});
+let sx=null,sy=null;const sw=$('#step');
+sw.addEventListener('touchstart',e=>{sx=e.touches[0].clientX;sy=e.touches[0].clientY},{passive:true});
+sw.addEventListener('touchend',e=>{if(sx===null)return;const dx=e.changedTouches[0].clientX-sx,dy=e.changedTouches[0].clientY-sy;if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)*1.5)go(cur+(dx<0?1:-1));sx=null},{passive:true});
+go(0);
+// people
+const pg=$('#peopleGrid'),dlg=$('#dlg');
+P.forEach(p=>{const b=document.createElement('button');b.className='pc';b.style.setProperty('--c',p.c);b.innerHTML=`<div class="nm">${p.n}</div><div class="zi">${p.z||'&nbsp;'}</div><div class="role">${p.r}</div>`;
+ b.onclick=()=>{$('#dlgIn').style.setProperty('--c',p.c);$('#dlgIn').innerHTML=`<button class="x" aria-label="關閉" onclick="dlg.close()">×</button><h3 style="margin:0">${p.n} <small>${p.z}</small></h3><p class="note">${p.r}</p><p>${p.b}</p><p class="note">出處：${p.s}</p>`;dlg.showModal();};pg.appendChild(b);});
+dlg.addEventListener('click',e=>{if(e.target===dlg)dlg.close()});
+$('#fictionBody').innerHTML=F.map(f=>`<tr><td><b>${f[0]}</b></td><td>${f[1]}</td><td>${f[2]}</td><td><span class="tag ${f[3]==='虛構'?'f':'d'}">${f[3]}</span></td></tr>`).join('');
+$('#debateBox').innerHTML=D.map(d=>`<article><h3>${d[0]}<span class="tag d">爭議</span></h3>${d[1]}</article>`).join('');
+// embers
+const em=$('#embers');for(let k=0;k<24;k++){const i=document.createElement('i');i.style.left=Math.random()*100+'%';i.style.animationDuration=(4+Math.random()*5)+'s';i.style.animationDelay=(-Math.random()*8)+'s';em.appendChild(i);}
+</script>
+</body>
+</html>
